@@ -46,11 +46,12 @@ app.post("/webhook", function (req, res) {
           processPostback(event);
         }else if(event.message) {
 			var apirequest = apiai.textRequest(event.message.text, {
-			    sessionId: 1
+			    sessionId: event.sender.id
 			});
  
 			apirequest.on('response', function(response) {
 			    console.log(JSON.stringify( response));
+				sendMessage(event.sender.id, {text: response.fulfillment.speech});
 			});
  
 			apirequest.on('error', function(error) {
