@@ -16,14 +16,16 @@ app.get("/", function (req, res) {
 
 // All callbacks for Messenger will be POST-ed here
 app.post("/webhook", function (req, res) {
-	 console.log("webhook Sarted" );
+	 console.log("webhook Sarted" +req.body.object);
   // Make sure this is a page subscription
   if (req.body.object == "page") {
     // Iterate over each entry
     // There may be multiple entries if batched
     req.body.entry.forEach(function(entry) {
       // Iterate over each messaging event
+		 console.log("Inside Entry Loop" +entry);
       entry.messaging.forEach(function(event) {
+		  console.log("Inside Entry Loop" +event);
         if (event.postback) {
           processPostback(event);
         }
