@@ -5,7 +5,7 @@ var JSON = require("JSON");
 var apiai = require('apiai');
 
 var app = express();
-var app = apiai(process.env.APIAI_CLIENT_ACCESS_TOKEN);
+var api = apiai(process.env.APIAI_CLIENT_ACCESS_TOKEN);
 app.use(bodyParser.urlencoded({extended: false}));
 app.use(bodyParser.json());
 app.listen((process.env.PORT || 5000));
@@ -33,15 +33,15 @@ app.post("/webhook", function (req, res) {
         if (event.postback) {
           processPostback(event);
         }else{
-			var request = app.textRequest(event.message.text, {
+			var apirequest = api.textRequest(event.message.text, {
 			    sessionId: event.sender.id
 			});
  
-			request.on('response', function(response) {
+			apirequest.on('response', function(response) {
 			    console.log(response);
 			});
  
-			request.on('error', function(error) {
+			apirequest.on('error', function(error) {
 			    console.log(error);
 			});
 			
