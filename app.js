@@ -1,6 +1,7 @@
 var express = require("express");
 var request = require("request");
 var bodyParser = require("body-parser");
+var JSON = require("JSON");
 
 var app = express();
 app.use(bodyParser.urlencoded({extended: false}));
@@ -25,7 +26,8 @@ app.post("/webhook", function (req, res) {
       // Iterate over each messaging event
 		 console.log("Inside Entry Loop" +entry);
       entry.messaging.forEach(function(event) {
-		  console.log("Inside Entry Loop" +event);
+		  console.log("Inside Entry Loop" + JSON.stringify( event));
+		 
         if (event.postback) {
           processPostback(event);
         }
