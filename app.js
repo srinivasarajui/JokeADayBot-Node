@@ -30,13 +30,7 @@ app.post("/webhook", function (req, res) {
 		 
         if (event.postback) {
           processPostback(event);
-        }else (event.message) {
-		 	
-	        if (event.text) {
-				sendMessage(event.sender.id, {text:event.text});
-				
-	        }	
-		}
+        }
       });
     });
 
@@ -70,7 +64,7 @@ console.log("payload" +payload);
         greeting = "Hi " + name + ". ";
       }
       var message = greeting + "My name is SP Movie Bot. I can tell you various details regarding movies. What movie would you like to know about?";
-      sendMessage(senderId, {text:message});
+      sendMessage(senderId, {text: message});
     });
   }
 }
