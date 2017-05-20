@@ -2,29 +2,28 @@ var express = require("express");
 var request = require("request");
 var bodyParser = require("body-parser");
 var JSON = require("JSON");
-var apiai = require('apiai');
+
+var nlp = require('./nlpControl');
 
 var app = express();
-var apiai = apiai(process.env.APIAI_CLIENT_ACCESS_TOKEN);
 app.use(bodyParser.urlencoded({extended: false}));
 app.use(bodyParser.json());
 app.listen((process.env.PORT || 5000));
 
 // Server index page
 app.get("/", function (req, res) {
+  
+	nlp.query(1,'Hi',function(message){
+		console.log(message)
+	});
+	/*var apirequest = apiai.textRequest('Hi', { sessionId: 1 });
+
+ apirequest.on('response', function(response) { console.log(response); });
+
+ apirequest.on('error', function(error) { console.log(error); }); apirequest.end();
+*/
   res.send("Deployed!");
-var apirequest = apiai.textRequest('Hello!', {
-    sessionId: 1
-});
-
-apirequest.on('response', function(response) {
-    console.log(response);
-});
-
-apirequest.on('error', function(error) {
-    console.log(error);
-});
-apirequest.end();
+  
 });
 
 // Facebook Webhook
@@ -45,21 +44,12 @@ app.post("/webhook", function (req, res) {
         if (event.postback) {
           processPostback(event);
         }else if(event.message) {
-			var apirequest = apiai.textRequest(event.message.text, {
-			    sessionId: 1
+			nlp.query(1,event.message.text,function(message){
+				sendMessage(event.sender.id, {text: message});
 			});
- 
-			apirequest.on('response', function(response) {
-			    console.log(JSON.stringify( response));
-				sendMessage(event.sender.id, {text: response.result.fulfillment.speech});
-			});
- 
-			apirequest.on('error', function(error) {
-			    console.log(error);
-			});
-			apirequest.end();
-			console.log("Working on call back");
-        	sendMessage(event.sender.id, {text: event.message.text});
+			
+			//console.log("Working on call back");
+        	//sendMessage(event.sender.id, {text: event.message.text});
         }
       });
     });
