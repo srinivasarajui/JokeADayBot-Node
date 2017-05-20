@@ -50,7 +50,7 @@ app.post("/webhook", function (req, res) {
 			});
  
 			apirequest.on('response', function(response) {
-			    console.log(response);
+			    console.log(JSON.stringify( response));
 			});
  
 			apirequest.on('error', function(error) {
