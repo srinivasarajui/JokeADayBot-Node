@@ -1,0 +1,22 @@
+{
+  "name": "jokeadaybot",
+  "version": "0.0.1",
+  "description": "This a node implmentation of Joke A day Bot",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/srinivasarajui/JokeADayBot-Node.git"
+  },
+  "keywords": [
+    "ChatBot"
+  ],
+  "author": "srini",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/srinivasarajui/JokeADayBot-Node/issues"
+  },
+  "homepage": "https://github.com/srinivasarajui/JokeADayBot-Node#readme"
+}
