@@ -4,7 +4,8 @@
   "description": "This a node implmentation of Joke A day Bot",
   "main": "app.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+  	"start": "node app.js"
   },
   "repository": {
     "type": "git",
@@ -18,5 +19,11 @@
   "bugs": {
     "url": "https://github.com/srinivasarajui/JokeADayBot-Node/issues"
   },
-  "homepage": "https://github.com/srinivasarajui/JokeADayBot-Node#readme"
+  "homepage": "https://github.com/srinivasarajui/JokeADayBot-Node#readme",
+  "dependencies": {
+    "body-parser": "^1.17.2",
+    "express": "^4.15.3",
+    "mongoose": "^4.10.0",
+    "request": "^2.81.0"
+  }
 }
