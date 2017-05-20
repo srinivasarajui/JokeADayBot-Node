@@ -45,7 +45,7 @@ app.post("/webhook", function (req, res) {
         if (event.postback) {
           processPostback(event);
         }else if(event.message) {
-			var apirequest = apiai.textRequest('Hello!', {
+			var apirequest = apiai.textRequest(event.message.text, {
 			    sessionId: 1
 			});
  
