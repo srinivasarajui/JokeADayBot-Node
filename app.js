@@ -51,7 +51,7 @@ app.post("/webhook", function (req, res) {
  
 			apirequest.on('response', function(response) {
 			    console.log(JSON.stringify( response));
-				sendMessage(event.sender.id, {text: response.fulfillment.speech});
+				sendMessage(event.sender.id, {text: response.result.fulfillment.speech});
 			});
  
 			apirequest.on('error', function(error) {
