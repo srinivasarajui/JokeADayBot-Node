@@ -13,6 +13,18 @@ app.listen((process.env.PORT || 5000));
 // Server index page
 app.get("/", function (req, res) {
   res.send("Deployed!");
+var apirequest = apiai.textRequest('Hello!', {
+    sessionId: 1
+});
+
+apirequest.on('response', function(response) {
+    console.log(response);
+});
+
+apirequest.on('error', function(error) {
+    console.log(error);
+});
+apirequest.end();
 });
 
 // Facebook Webhook
@@ -44,7 +56,8 @@ app.post("/webhook", function (req, res) {
 			apirequest.on('error', function(error) {
 			    console.log(error);
 			});
-			
+			apirequest.end();
+			console.log("Working on call back");
         	sendMessage(event.sender.id, {text: event.message.text});
         }
       });
