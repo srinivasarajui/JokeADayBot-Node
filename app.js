@@ -31,7 +31,7 @@ apirequest.end();
 
 // All callbacks for Messenger will be POST-ed here
 app.post("/webhook", function (req, res) {
-	 console.log("webhook Sarted" +req.body.object);
+	 console.log("webhook " +rJSON.stringify( req.body);
   // Make sure this is a page subscription
   if (req.body.object == "page") {
     // Iterate over each entry
