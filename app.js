@@ -2,7 +2,6 @@ var express = require("express");
 var request = require("request");
 var bodyParser = require("body-parser");
 var JSON = require("JSON");
-
 var nlp = require('./nlpControl');
 
 var app = express();
@@ -16,12 +15,7 @@ app.get("/", function (req, res) {
 	nlp.query(1,'Hi',function(message){
 		console.log(message)
 	});
-	/*var apirequest = apiai.textRequest('Hi', { sessionId: 1 });
 
- apirequest.on('response', function(response) { console.log(response); });
-
- apirequest.on('error', function(error) { console.log(error); }); apirequest.end();
-*/
   res.send("Deployed!");
   
 });
