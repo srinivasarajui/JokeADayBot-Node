@@ -1,8 +1,9 @@
-var express = require("express");
-var request = require("request");
-var bodyParser = require("body-parser");
-var JSON = require("JSON");
-var nlp = require('./nlpControl');
+const express = require("express");
+const request = require("request");
+const bodyParser = require("body-parser");
+const JSON = require("JSON");
+const nlp = require('./nlpControl');
+const db = require('./database');
 
 var app = express();
 app.use(bodyParser.urlencoded({extended: false}));
@@ -12,10 +13,11 @@ app.listen((process.env.PORT || 5000));
 // Server index page
 app.get("/", function (req, res) {
   
-	nlp.query(1,'Hi',function(message){
+	/*nlp.query(1,'Hi',function(message){
 		console.log(message)
-	});
-
+	});*/
+		db.insetData();
+		db.selectData();
   res.send("Deployed!");
   
 });
@@ -38,7 +40,8 @@ app.post("/webhook", function (req, res) {
         if (event.postback) {
           processPostback(event);
         }else if(event.message) {
-			nlp.query(1,event.message.text,function(message){
+			console.log("In Message ");
+			nlp.query(parseInt(event.sender.id),event.message.text,function(message){
 				sendMessage(event.sender.id, {text: message});
 			});
 			
